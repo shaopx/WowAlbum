@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@drawable/model_list_item_bg"
+    android:padding="16dp">
+
+    <!-- 头像 -->
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:scaleType="centerCrop" />
+
+    <!-- 名字 -->
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/avatar"
+        android:text="John Doe"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <!-- 概述 -->
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewName"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/avatar"
+        android:text="A brief description"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+
+    <!-- 图片1 -->
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="27dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerCrop" />
+
+    <!-- 图片2 -->
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="27dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/imageView1"
+        android:scaleType="centerCrop" />
+
+    <!-- 图片3 -->
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="27dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@id/imageView2"
+        android:scaleType="centerCrop" />
+
+</RelativeLayout>

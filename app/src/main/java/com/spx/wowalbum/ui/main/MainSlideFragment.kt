@@ -14,10 +14,10 @@ import com.spx.wowalbum.R
 
 private const val NUM_PAGES = 5
 
-class MainFragment : Fragment() {
+class MainSlideFragment : Fragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() = MainSlideFragment()
     }
 
     private lateinit var viewModel: MainViewModel

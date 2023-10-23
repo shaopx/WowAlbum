@@ -3,7 +3,9 @@ package com.spx.wowalbum.net;
 import android.content.Context;
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor;
+import com.spx.wowalbum.MyApplication;
 
+import coil.util.CoilUtils;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,6 +36,7 @@ public class OkHttpClientFactory {
 //                .addInterceptor(new ChuckerInterceptor(context))
                 .addInterceptor(myInterceptor)
                 .addInterceptor(logging)
+                .cache(CoilUtils.createDefaultCache(MyApplication.instance))
                 .build();
         return client;
     }

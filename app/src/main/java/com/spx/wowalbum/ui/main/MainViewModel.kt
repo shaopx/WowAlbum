@@ -27,9 +27,10 @@ val TAG = "WowAlbum"
 
 class MainViewModel : ViewModel() {
 
-    private var modelList = listOf<ModelData>()
+    private var _modelList = MutableLiveData<List<ModelData>>()
     private val _dataList = MutableLiveData<List<Product>>()
     val dataList: LiveData<List<Product>> get() = _dataList
+    val modelList: LiveData<List<ModelData>> get() = _modelList
 
     private val pageSize = 10
     private var currentPage = 0
@@ -98,9 +99,10 @@ class MainViewModel : ViewModel() {
             }
 
             val jsonString: String = stringBuilder.toString()
-            modelList = gson.fromJson(jsonString, ModelList::class.java).models
-            Log.i(TAG, "_loadAndParseJson: size: ${modelList.size}")
-            var productList = generateProducts(modelList)
+            val models = gson.fromJson(jsonString, ModelList::class.java).models
+            _modelList.postValue(models)
+            Log.i(TAG, "_loadAndParseJson: size: ${models.size}")
+            var productList = generateProducts(models)
             Log.i(TAG, "_loadAndParseJson: productList.size: ${productList.size}")
             _dataList.postValue(productList)
         } catch (e: IOException) {

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav_graph"
+    app:startDestination="@id/mainListFragment">
+
+    <fragment
+        android:id="@+id/mainListFragment"
+        android:name="com.spx.wowalbum.ui.main.MainListFragment"
+        android:label="MainListFragment"
+        tools:layout="@layout/fragment_main_rv">
+        <action
+            android:id="@+id/action_mainListFragment_to_modelProfileFragment"
+            app:destination="@id/modelProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/modelProfileFragment"
+        android:name="com.spx.wowalbum.ui.main.ModelProfileFragment"
+        android:label="ModelProfileFragment" >
+        <action
+            android:id="@+id/action_modelProfileFragment_to_photoSlideFragment"
+            app:destination="@id/photoSlideFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"  />
+    </fragment>
+    <fragment
+        android:id="@+id/photoSlideFragment"
+        android:name="com.spx.wowalbum.ui.main.PhotoSlideFragment"
+        android:label="PhotoSlideFragment" />
+</navigation>

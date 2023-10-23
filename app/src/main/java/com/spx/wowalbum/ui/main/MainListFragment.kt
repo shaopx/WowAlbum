@@ -1,17 +1,17 @@
 package com.spx.wowalbum.ui.main
 
 import android.content.Context
-import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -20,9 +20,11 @@ import com.spx.wowalbum.R
 
 private const val NUM_PAGES = 5
 
+
 class MainListFragment : Fragment() {
 
     companion object {
+        val TAG = "MainListFragment"
         fun newInstance() = MainListFragment()
     }
 
@@ -32,6 +34,7 @@ class MainListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i(TAG, "onCreate: ...")
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
@@ -39,11 +42,13 @@ class MainListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.i(TAG, "onCreateView: ...")
         return inflater.inflate(R.layout.fragment_main_rv, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.i(TAG, "onViewCreated: ...")
         view.findViewById<View>(R.id.icon_back_iv).visibility = View.GONE
         view.findViewById<TextView>(R.id.textViewTitle).text = "所有妹子"
         // Instantiate a ViewPager2 and a PagerAdapter.
@@ -60,7 +65,18 @@ class MainListFragment : Fragment() {
         viewModel.initModelDataList(requireContext())
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.i(TAG, "onDestroyView: ...")
+    }
+
+    fun gotoModelProfile(model: ModelData) {
+        val bundle = Bundle()
+        bundle.putSerializable("data", model)
+        findNavController().navigate(R.id.action_mainListFragment_to_modelProfileFragment, bundle)
+    }
+
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView: TextView = itemView.findViewById(R.id.textViewName)
         private val descTextView: TextView = itemView.findViewById(R.id.textViewDescription)
         private val avatarIv: ImageView = itemView.findViewById(R.id.avatar)
@@ -85,14 +101,7 @@ class MainListFragment : Fragment() {
                 showProductCover(imageView3, model.products[0].cover_url)
             }
             itemView.setOnClickListener {
-                (it.context as AppCompatActivity).startActivity(
-                    Intent(
-                        it.context,
-                        ModelActivity::class.java
-                    ).apply {
-                        putExtra("data", model)
-                    }
-                )
+                gotoModelProfile(model)
             }
         }
 
@@ -103,7 +112,8 @@ class MainListFragment : Fragment() {
         }
     }
 
-    class VerticalListAdapter(private val context: Context) : RecyclerView.Adapter<MyViewHolder>() {
+    inner class VerticalListAdapter(private val context: Context) :
+        RecyclerView.Adapter<MyViewHolder>() {
         private var dataList: List<ModelData> = emptyList()
 
         fun updateData(dataList: List<ModelData>) {

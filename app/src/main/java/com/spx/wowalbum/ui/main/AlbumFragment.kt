@@ -18,6 +18,7 @@ import coil.Coil
 import coil.imageLoader
 import coil.load
 import coil.request.ImageRequest
+import coil.transform.BlurTransformation
 import com.bumptech.glide.Glide
 import com.spx.wowalbum.R
 
@@ -110,31 +111,9 @@ class AlbumFragment : Fragment() {
 //                 //使用 product 更新 UI
                 coverImageView.load(photoUrl) {
                     crossfade(true)
+                    transformations(BlurTransformation(context = coverImageView.context, radius = 20f, sampling = 2f))
+//                    BlurTransformation(context = coverImageView.context,)
                 }
-//                val request = ImageRequest.Builder(itemView.context)
-//                    .data(photoUrl)
-//                    .listener(onStart = {
-//                        Log.i(TAG, "load onStart:")
-//                    }, onCancel = {
-//                        Log.i(TAG, "load onCancel:")
-//                    }, onSuccess = { r,meta->
-//                        Log.i(TAG, "load onSuccess:"+meta)
-//                    }, onError = {r, error->
-//                        Log.i(TAG, "load onError:"+error, error)
-//                    })
-//                    .target { drawable ->
-//                        // Handle the result.
-//                        Log.e(TAG, "bind: drawable:"+drawable, RuntimeException("stack"))
-//                        val bitmapDrawable: BitmapDrawable = drawable as BitmapDrawable
-//                        Log.i(TAG, "bind: bitmap byteCount:" + bitmapDrawable.bitmap.byteCount)
-//                        Log.i(
-//                            TAG,
-//                            "bind: bitmap size:" + bitmapDrawable.bitmap.width + "x" + bitmapDrawable.bitmap.height
-//                        )
-//                        coverImageView.setImageDrawable(drawable)
-//                    }
-//                    .build()
-//                itemView.context.imageLoader.enqueue(request)
             }
         }
     }

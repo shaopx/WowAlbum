@@ -6,7 +6,6 @@ import coil.ImageLoaderFactory
 import com.spx.wowalbum.net.OkHttpClientFactory
 
 class MyApplication : Application(), ImageLoaderFactory {
-
     override fun onCreate() {
         super.onCreate()
         instance = this
@@ -21,7 +20,7 @@ class MyApplication : Application(), ImageLoaderFactory {
             .build()
     }
 
-    companion object{
-        lateinit var instance:MyApplication
+    companion object {
+        lateinit var instance: MyApplication
     }
 }

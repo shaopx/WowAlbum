@@ -8,8 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -33,6 +34,11 @@ class ModelProfileFragment : Fragment() {
     private lateinit var listView: RecyclerView
     private lateinit var model: ModelData
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        model = arguments?.getSerializable("data") as ModelData
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +50,7 @@ class ModelProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         view.findViewById<TextView>(R.id.textViewTitle).text =  model.name + "  " + model.desc
         view.findViewById<View>(R.id.icon_back_iv).setOnClickListener {
-            requireActivity().finish()
+            findNavController().popBackStack()
         }
 
         listView = view.findViewById(R.id.model_product_List)
@@ -60,26 +66,37 @@ class ModelProfileFragment : Fragment() {
 //        viewModel.initModelDataList(requireContext())
     }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun gotoPhotoSlide(product: Product){
+        val bundle = Bundle()
+        bundle.putSerializable("data", product)
+        findNavController().navigate(R.id.action_modelProfileFragment_to_photoSlideFragment,bundle)
+    }
+
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imageView)
         fun bind(product: Product) {
             imageView.load(product.cover_url) {
                 crossfade(true)
             }
             itemView.setOnClickListener {
-                (it.context as AppCompatActivity).startActivity(
-                    Intent(
-                        it.context,
-                        PhotoSlideActivity::class.java
-                    ).apply {
-                        putExtra("data", product)
-                    }
-                )
+//                (it.context as AppCompatActivity).startActivity(
+//                    Intent(
+//                        it.context,
+//                        PhotoSlideActivity::class.java
+//                    ).apply {
+//                        putExtra("data", product)
+//                    }
+//                )
+                val bundle = Bundle()
+                bundle.putSerializable("data", product)
+//                findNavController().navigate(R.id.action_modelProfileFragment_to_photoSlideFragment,bundle)
+                Navigation.findNavController(it).navigate(R.id.action_modelProfileFragment_to_photoSlideFragment,bundle)
+//                gotoPhotoSlide(product)
             }
         }
     }
 
-    class VerticalListAdapter(private val context: Context, val dataList: List<Product>) :
+    inner class VerticalListAdapter(private val context: Context, val dataList: List<Product>) :
         RecyclerView.Adapter<MyViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

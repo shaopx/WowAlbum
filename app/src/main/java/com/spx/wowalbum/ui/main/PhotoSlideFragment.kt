@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.spx.wowalbum.R
@@ -37,7 +38,7 @@ class PhotoSlideFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PhotoSlideViewModel::class.java)
-        // TODO: Use the ViewModel
+        product = arguments?.getSerializable("data") as Product
     }
 
     override fun onCreateView(
@@ -52,24 +53,13 @@ class PhotoSlideFragment : Fragment() {
         // Instantiate a ViewPager2 and a PagerAdapter.
         view.findViewById<TextView>(R.id.textViewTitle).text = product.product_desc
         view.findViewById<View>(R.id.icon_back_iv).setOnClickListener {
-            requireActivity().finish()
+            findNavController().popBackStack()
         }
         viewPager = view.findViewById(R.id.photo_pager)
         // The pager adapter, which provides the pages to the view pager widget.
         val pagerAdapter = AlbumFragment.HorizontalSlidePagerAdapter(product.photos)
         viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         viewPager.adapter = pagerAdapter
-//        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//            override fun onPageSelected(position: Int) {
-//                // 在这里处理页面选中时的逻辑
-//                // position 是当前选中的页面的索引
-//                Log.i(TAG, "Selected page: $position")
-//                pagerAdapter.preload(requireContext(), position)
-////                    .data(photoUrl))
-//            }
-//        })
-
-
         viewModel.photoUrls.observe(viewLifecycleOwner, Observer { newUrls ->
             // 更新 Adapter 中的数据
             pagerAdapter.updateData(newUrls)
@@ -82,11 +72,6 @@ class PhotoSlideFragment : Fragment() {
     private inner class VerticalSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
 
         private var dataList: List<Product> = emptyList()
-
-        fun updateData(dataList: List<Product>) {
-            this.dataList = dataList
-            notifyDataSetChanged()
-        }
 
         override fun getItemCount(): Int = dataList.size
 

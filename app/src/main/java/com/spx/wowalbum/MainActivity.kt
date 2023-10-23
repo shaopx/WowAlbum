@@ -4,7 +4,9 @@ import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.spx.wowalbum.ui.main.MainListFragment
+import com.spx.wowalbum.ui.main.TAG
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,11 +17,12 @@ class MainActivity : AppCompatActivity() {
             window.statusBarColor = Color.BLACK
             window.navigationBarColor = Color.BLACK
         }
+        Log.i(TAG, "MainActivity onCreate: ...")
         setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainListFragment.newInstance())
-                .commitNow()
-        }
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.container, MainListFragment.newInstance())
+//                .commitNow()
+//        }
     }
 }

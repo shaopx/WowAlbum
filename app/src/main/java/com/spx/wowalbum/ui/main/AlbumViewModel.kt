@@ -7,8 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.spx.wowalbum.MyApplication
 import com.spx.wowalbum.db.AppDataBase
-import com.spx.wowalbum.db.Photo
-import com.spx.wowalbum.net.XiurenApi
+import com.spx.wowalbum.net.XiuRenApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -32,7 +31,7 @@ class AlbumViewModel : ViewModel() {
         viewModelScope.launch {
             val start = System.currentTimeMillis()
             var bitmap =
-                XiurenApi.getInstance().getPhotoImage("xiuren/2022", "20225583", "2022558316")
+                XiuRenApi.getInstance().getPhotoImage("xiuren/2022", "20225583", "2022558316")
             val end = System.currentTimeMillis()
             Log.i(
                 TAG,

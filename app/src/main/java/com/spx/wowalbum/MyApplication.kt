@@ -4,18 +4,26 @@ import android.app.Application
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import com.spx.wowalbum.net.OkHttpClientFactory
+import dagger.hilt.android.HiltAndroidApp
+import okhttp3.OkHttpClient
+import javax.inject.Inject
 
+@HiltAndroidApp
 class MyApplication : Application(), ImageLoaderFactory {
+
+    @Inject
+    lateinit var okhttpclient: OkHttpClient
+
     override fun onCreate() {
-        super.onCreate()
         instance = this
+        super.onCreate()
     }
 
     override fun newImageLoader(): ImageLoader {
         return ImageLoader.Builder(this)
             .crossfade(true)
             .okHttpClient {
-                OkHttpClientFactory().create()
+                okhttpclient
             }
             .build()
     }

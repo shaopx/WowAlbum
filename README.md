@@ -11,9 +11,9 @@
 7. ViewPager2 
 
 ### 效果图
-![效果图](https://github.com/shaopx/WowAlbum/blob/master/screenshot/003.jpg)
-![效果图](https://github.com/shaopx/WowAlbum/blob/master/screenshot/002.jpg)
-![效果图](https://github.com/shaopx/WowAlbum/blob/master/screenshot/001.jpg)
+<figure class="third">
+<img src="https://github.com/shaopx/WowAlbum/blob/master/screenshot/003.jpg" width=100/><img src="https://github.com/shaopx/WowAlbum/blob/master/screenshot/002.jpg" width=100/><img src="https://github.com/shaopx/WowAlbum/blob/master/screenshot/001.jpg" width=100/>
+</figure>
 
 ## 备注
 使用的图片源为秀人网接口提供, 本项目仅作为学习演示用, 非商业行为, 如有侵权请私信联系我. 

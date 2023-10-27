@@ -1,6 +1,7 @@
 package com.spx.wowalbum.ui.main
 
 import android.content.Context
+import android.graphics.BlurMaskFilter.Blur
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
@@ -18,7 +19,7 @@ import coil.Coil
 import coil.imageLoader
 import coil.load
 import coil.request.ImageRequest
-import coil.transform.BlurTransformation
+//import coil.transform.BlurTransformation
 import com.bumptech.glide.Glide
 import com.spx.wowalbum.R
 
@@ -111,7 +112,7 @@ class AlbumFragment : Fragment() {
 //                 //使用 product 更新 UI
                 coverImageView.load(photoUrl) {
                     crossfade(true)
-                    transformations(BlurTransformation(context = coverImageView.context, radius = 20f, sampling = 2f))
+//                    transformations(Blur(context = coverImageView.context, radius = 20f, sampling = 2f))
 //                    BlurTransformation(context = coverImageView.context,)
                 }
             }

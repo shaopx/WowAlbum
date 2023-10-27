@@ -3,6 +3,7 @@ package com.spx.wowalbum
 import android.app.Application
 import coil.ImageLoader
 import coil.ImageLoaderFactory
+import coil.disk.DiskCache
 import com.spx.wowalbum.net.OkHttpClientFactory
 import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
@@ -24,6 +25,11 @@ class MyApplication : Application(), ImageLoaderFactory {
             .crossfade(true)
             .okHttpClient {
                 okhttpclient
+            }
+            .diskCache {
+                DiskCache.Builder()
+                    .directory(cacheDir.resolve("image_cache"))
+                    .build()
             }
             .build()
     }

@@ -25,11 +25,11 @@ object NetworkModule {
         return OkHttpClientFactory().create(app)
     }
 
-    @Singleton
-    @Provides
-    fun coilCache(@ApplicationContext context: Application) : Cache {
-        return CoilUtils.createDefaultCache(context)
-    }
+//    @Singleton
+//    @Provides
+//    fun coilCache(@ApplicationContext context: Application) : Cache {
+//        return CoilUtils.createDefaultCache(context)
+//    }
 
     @Singleton
     @Provides

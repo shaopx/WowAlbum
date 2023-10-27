@@ -46,7 +46,7 @@ class OkHttpClientFactory {
         return Builder() //                .addInterceptor(new ChuckerInterceptor(context))
             .addInterceptor(myInterceptor)
             .addInterceptor(logging)
-            .cache(CoilUtils.createDefaultCache(context))
+//            .cache(CoilUtils.createDefaultCache(context))
             .build()
     }
 }
